@@ -1,8 +1,12 @@
 title                : Template Python DataCamp Course
-author_field         : westonstearns
-description          : This is an automatically generated demo course which will help you on your way to create an awesome DataCamp course.
-author_bio           : westonstearns is an awesome DataCamp course creator.<br>You can say something about yourself <strong>here</strong>.
-university           : DataCamp
+author_field         : Johns Hopkins University
+description          : This specialization covers the concepts and tools to understand, analyze, and interpret data from next 
+  generation sequencing experiments. It teaches the most common tools used in genomic data science including how to use the 
+  command line, Python, R, Bioconductor, and Galaxy. The sequence is a stand alone introduction to genomic data science or 
+  a perfect compliment to a primary degree or postdoc in biology, molecular biology, or genetics. The Coursera Specialization 
+  can be found <a href="https://www.coursera.org/specializations/genomic-data-science" target="_blank"><here>.
+author_bio           : This demo course was created by DataCamp for demonstration purposes only.
+university           : Johns Hopkins University
 difficulty_level     : 2
 time_needed          : 1 hour
 programming_language : python
