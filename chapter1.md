@@ -1,164 +1,1083 @@
 ---
-title       : Insert the chapter title here
-description : Insert the chapter description here
+title       : Demo Matplotlib
+description : Data Visualization is a key skill for aspiring data scientists. Matplotlib makes it easy to create meaningful and insightful plots. In this chapter, you will learn to build various types of plots and to customize them to make them more visually appealing and interpretable.
 attachments :
-  slides_link : https://s3.amazonaws.com/assets.datacamp.com/course/teach/slides_example.pdf
+  slides_link : https://s3.amazonaws.com/assets.datacamp.com/course/intermediate_python/intermediate_python_ch1_slides.pdf
+free_preview : TRUE
 
---- type:VideoExercise lang:python xp:50 skills:1 key:0344e51ba6
-## Analyze movie ratings
+--- type:NormalExercise lang:python xp:100 skills:2 key:bd57d4ff35
+## Line plot (1)
 
-*** =video_link
-//player.vimeo.com/video/154783078
+With matplotlib, you can create a bunch of different plots in Python. The most basic plot is the line plot. A general recipe is given here.
 
---- type:MultipleChoiceExercise lang:python xp:50 skills:1 key:bb288e9efe
-## A really bad movie
-
-Have a look at the plot that showed up in the viewer to the right. Which type of movies have the worst rating assigned to them?
-
-*** =instructions
-- Long movies, clearly
-- Short movies, clearly
-- Long movies, but the correlation seems weak
-- Short movies, but the correlation seems weak
-
-*** =hint
-Have a look at the plot. Do you see a trend in the dots?
-
-*** =pre_exercise_code
-```{r}
-# The pre exercise code runs code to initialize the user's workspace. You can use it for several things:
-
-# 1. Pre-load packages, so that users don't have to do this manually.
-import pandas as pd
+```
 import matplotlib.pyplot as plt
-
-# 2. Preload a dataset. The code below will read the csv that is stored at the URL's location.
-# The movies variable will be available in the user's console.
-movies = pd.read_csv("http://s3.amazonaws.com/assets.datacamp.com/course/introduction_to_r/movies.csv")
-
-# 3. Create a plot in the viewer, that students can check out while reading the exercise
-plt.scatter(movies.runtime, movies.rating)
+plt.plot(x,y)
 plt.show()
 ```
 
-*** =sct
-```{r}
-# The sct section defines the Submission Correctness Tests (SCTs) used to
-# evaluate the student's response. All functions used here are defined in the 
-# pythonwhat Python package
-
-msg_bad = "That is not correct!"
-msg_success = "Exactly! The correlation is very weak though."
-
-# Use test_mc() to grade multiple choice exercises. 
-# Pass the correct option (Action, option 2 in the instructions) to correct.
-# Pass the feedback messages, both positive and negative, to feedback_msgs in the appropriate order.
-test_mc(4, [msg_bad, msg_bad, msg_bad, msg_success]) 
-```
-
---- type:MultipleChoiceExercise lang:python xp:50 skills:1 key:9fd2541dd2
-## A really bad movie
-
-Have a look at the plot that showed up in the viewer to the right. Which type of movies have the worst rating assigned to them?
+In the video, you already saw how much the world population has grown over the past years. Will it continue to do so? The world bank has estimates of the world population for the years 1950 up to 2100. The years are loaded in your workspace as a list called `year`, and the corresponding populations as a list called `pop`.
 
 *** =instructions
-- Long movies, clearly
-- Short movies, clearly
-- Long movies, but the correlation seems weak
-- Short movies, but the correlation seems weak
+- [`print()`](https://docs.python.org/3/library/functions.html#print) the last item from both the `year` and the `pop` list to see what the predicted population for the year 2100 is. Use two `print()` functions.
+- Before you can start, you should import `matplotlib.pyplot` as `plt`. `pyplot` is a sub-package of `matplotlib`, hence the dot.
+- Use [`plt.plot()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot) to build a line plot. `year` should be mapped on the horizontal axis, `pop` on the vertical axis. Don't forget to finish off with the [`show()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show) function to actually display the plot.
 
 *** =hint
-Have a look at the plot. Do you see a trend in the dots?
+- To access the last element of a regular Python list, use `[-1]`.
+- You'll need `matplotlib.pyplot` in your import call.
+- Use [`plt.plot()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot) and [`plt.show()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show) to build the line plot.
 
 *** =pre_exercise_code
 ```{python}
-# The pre exercise code runs code to initialize the user's workspace. You can use it for several things:
-
-# 1. Pre-load packages, so that users don't have to do this manually.
-import pandas as pd
-import matplotlib.pyplot as plt
-
-# 2. Preload a dataset. The code below will read the csv that is stored at the URL's location.
-# The movies variable will be available in the user's console.
-movies = pd.read_csv("http://s3.amazonaws.com/assets.datacamp.com/course/introduction_to_r/movies.csv")
-
-# 3. Create a plot in the viewer, that students can check out while reading the exercise
-plt.scatter(movies.runtime, movies.rating)
-plt.show()
-```
-
-*** =sct
-```{python}
-# The sct section defines the Submission Correctness Tests (SCTs) used to
-# evaluate the student's response. All functions used here are defined in the
-# pythonwhat Python package
-
-msg_bad = "That is not correct!"
-msg_success = "Exactly! The correlation is very weak though."
-
-# Use test_mc() to grade multiple choice exercises.
-# Pass the correct option (option 4 in the instructions) to correct.
-# Pass the feedback messages, both positive and negative, to feedback_msgs in the appropriate order.
-test_mc(4, [msg_bad, msg_bad, msg_bad, msg_success])
-```
-
---- type:NormalExercise lang:python xp:100 skills:1 key:3eb0352e83
-## Plot the movies yourself
-
-Do you remember the plot of the last exercise? Let's make an even cooler plot!
-
-A dataset of movies, `movies`, is available in the workspace.
-
-*** =instructions
-- The first function, `np.unique()`, uses the `unique()` function of the `numpy` package to get integer values for the movie genres. You don't have to change this code, just have a look!
-- Import `pyplot` in the `matplotlib` package. Set an alias for this import: `plt`.
-- Use `plt.scatter()` to plot `movies.runtime` onto the x-axis, `movies.rating` onto the y-axis and use `ints` for the color of the dots. You should use the first and second positional argument, and the `c` keyword.
-- Show the plot using `plt.show()`.
-
-*** =hint
-- You don't have to program anything for the first instruction, just take a look at the first line of code.
-- Use `import ___ as ___` to import `matplotlib.pyplot` as `plt`.
-- Use `plt.scatter(___, ___, c = ___)` for the third instruction.
-- You'll always have to type in `plt.show()` to show the plot you created.
-
-*** =pre_exercise_code
-```{python}
-# The pre exercise code runs code to initialize the user's workspace. You can use it for several things:
-
-# 1. Preload a dataset. The code below will read the csv that is stored at the URL's location.
-# The movies variable will be available in the user's console.
-import pandas as pd
-movies = pd.read_csv("http://s3.amazonaws.com/assets.datacamp.com/course/introduction_to_r/movies.csv")
-
-# 2. Preload a package
-import numpy as np
+import matplotlib.pyplot as plt; import importlib; importlib.reload(plt)
+plt.clf()
+year = list(range(1950, 2101))
+pop = [2.53,2.57,2.62,2.67,2.71,2.76,2.81,2.86,2.92,2.97,3.03,3.08,3.14,3.2,3.26,3.33,3.4,3.47,3.54,3.62,3.69,3.77,3.84,3.92,4.,4.07,4.15,4.22,4.3,4.37,4.45,4.53,4.61,4.69,4.78,4.86,4.95,5.05,5.14,5.23,5.32,5.41,5.49,5.58,5.66,5.74,5.82,5.9,5.98,6.05,6.13,6.2,6.28,6.36,6.44,6.51,6.59,6.67,6.75,6.83,6.92,7.,7.08,7.16,7.24,7.32,7.4,7.48,7.56,7.64,7.72,7.79,7.87,7.94,8.01,8.08,8.15,8.22,8.29,8.36,8.42,8.49,8.56,8.62,8.68,8.74,8.8,8.86,8.92,8.98,9.04,9.09,9.15,9.2,9.26,9.31,9.36,9.41,9.46,9.5,9.55,9.6,9.64,9.68,9.73,9.77,9.81,9.85,9.88,9.92,9.96,9.99,10.03,10.06,10.09,10.13,10.16,10.19,10.22,10.25,10.28,10.31,10.33,10.36,10.38,10.41,10.43,10.46,10.48,10.5,10.52,10.55,10.57,10.59,10.61,10.63,10.65,10.66,10.68,10.7,10.72,10.73,10.75,10.77,10.78,10.79,10.81,10.82,10.83,10.84,10.85]
 ```
 
 *** =sample_code
 ```{python}
-# Get integer values for genres
-_, ints = np.unique(movies.genre, return_inverse = True)
-
-# Import matplotlib.pyplot
+# Print the last item from year and pop
 
 
-# Make a scatter plot: runtime on  x-axis, rating on y-axis and set c to ints
+
+# Import matplotlib.pyplot as plt
 
 
-# Show the plot
+# Make a line plot: year on the x-axis, pop on the y-axis
+
+
+```
+
+*** =solution
+```{python} 
+# Print the last item from years and populations
+print(year[-1])
+print(pop[-1])
+
+# Import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
+
+# Make a line plot: year on the x-axis, pop on the y-axis
+plt.plot(year, pop)
+plt.show()
+```
+
+*** =sct
+```{python}
+test_function("print", 1, 
+  incorrect_msg = "Use [`print()`](https://docs.python.org/3/library/functions.html#print) to print the last element of `year`, `year[-1]`.")
+test_function("print", 2,
+  incorrect_msg = "Use [`print()`](https://docs.python.org/3/library/functions.html#print) to print the last element of `pop`, `pop[-1]`.")
+
+test_import("matplotlib.pyplot",
+  not_imported_msg = "You can import pyplot by using `import matplotlib.pyplot`.",
+  incorrect_as_msg = "You should set the correct alias for `matplotlib.pyplot`, import it `as plt`.")
+
+msg = "Use `plt.plot(year, pop)` to plot what's instructed."
+test_function("matplotlib.pyplot.plot",
+  not_called_msg = msg,
+  incorrect_msg = msg)
+  
+msg = "Use [`plt.show()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show) to show the plot."
+test_function("matplotlib.pyplot.show",
+  not_called_msg = msg,
+  incorrect_msg = msg)
+
+success_msg("Great! Let's interpret the plot you just created.")
+```
+
+--- type:MultipleChoiceExercise lang:python xp:50 skills:2 key:3d440a66c5
+## Line Plot (2): Interpretation
+
+Have another look at the plot you created in the previous exercise; it's shown on the right. What is the first year in which there will be more than ten billion human beings on this planet? 
+
+*** =instructions
+- 2041
+- 2062
+- 2083
+- 2094
+
+*** =hint
+You can check the population for a particular year by checking out the plot. If you want the exact result, use `population[year.index(2030)]`, to get the population for 2030, for example.
+
+*** =pre_exercise_code
+```{python}
+import matplotlib.pyplot as plt; import importlib; importlib.reload(plt)
+plt.clf()
+year = list(range(1950, 2101))
+pop = [2.53,2.57,2.62,2.67,2.71,2.76,2.81,2.86,2.92,2.97,3.03,3.08,3.14,3.2,3.26,3.33,3.4,3.47,3.54,3.62,3.69,3.77,3.84,3.92,4.,4.07,4.15,4.22,4.3,4.37,4.45,4.53,4.61,4.69,4.78,4.86,4.95,5.05,5.14,5.23,5.32,5.41,5.49,5.58,5.66,5.74,5.82,5.9,5.98,6.05,6.13,6.2,6.28,6.36,6.44,6.51,6.59,6.67,6.75,6.83,6.92,7.,7.08,7.16,7.24,7.32,7.4,7.48,7.56,7.64,7.72,7.79,7.87,7.94,8.01,8.08,8.15,8.22,8.29,8.36,8.42,8.49,8.56,8.62,8.68,8.74,8.8,8.86,8.92,8.98,9.04,9.09,9.15,9.2,9.26,9.31,9.36,9.41,9.46,9.5,9.55,9.6,9.64,9.68,9.73,9.77,9.81,9.85,9.88,9.92,9.96,9.99,10.03,10.06,10.09,10.13,10.16,10.19,10.22,10.25,10.28,10.31,10.33,10.36,10.38,10.41,10.43,10.46,10.48,10.5,10.52,10.55,10.57,10.59,10.61,10.63,10.65,10.66,10.68,10.7,10.72,10.73,10.75,10.77,10.78,10.79,10.81,10.82,10.83,10.84,10.85]
+plt.plot(year,pop)
+plt.show()
+```
+
+*** =sct
+```{python}
+msg1 = "In 2041 the population wil be around 9 billion."
+msg2 = "Correct! Time to take your data visualization skills to the next level!"
+msg3 = "By 2083 the world population will have exceeded 10 billion for a long time already."
+msg4 = "By 2094 the world population will have exceeded 10 billion for a long time already."
+test_mc(2, msgs = [msg1, msg2, msg3, msg4])
+```
+
+--- type:NormalExercise lang:python xp:100 skills:2 key:6b262ab724
+## Line plot (3)
+
+Now that you've built your first line plot, let's start working on the data that professor Hans Rosling used to build his beautiful bubble chart. It was collected in 2007. Two lists are available for you:
+
+- `life_exp` which contains the life expectancy for each country and
+- `gdp_cap`, which contains the GDP per capita, for each country expressed in US Dollar.
+
+GDP stands for Gross Domestic Product. It basically represents the size of the economy of a country. Divide this by the population and you get the GDP per capita.
+
+`matplotlib.pyplot` is already imported as `plt`, so you can get started straight away.
+
+*** =instructions
+- Print the last item from both the list `gdp_cap`, and the list `life_exp`; it is information about Zimbabwe.
+- Build a line chart, with `gdp_cap` on the x-axis, and `life_exp` on the y-axis. Does it make sense to plot this data on a line plot? 
+- Don't forget to finish off with a [`plt.show()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show) command, to actually display the plot.
+
+*** =hint
+- Use `[-1]` to get the last item of a list.
+- As before, use [`plt.plot()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot). The first argument is `gdp_cap`, the second argumet is `life_exp`.
+- Write [`plt.show()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show) at the end of your script to actually display the plot.
+
+*** =pre_exercise_code
+```{python}
+import matplotlib.pyplot as plt; import importlib; importlib.reload(plt)
+import pandas as pd
+plt.clf()
+
+df = pd.read_csv('http://assets.datacamp.com/course/intermediate_python/gapminder.csv', index_col = 0)
+gdp_cap = list(df.gdp_cap)
+life_exp = list(df.life_exp)
+```
+
+*** =sample_code
+```{python}
+# Print the last item of gdp_cap and life_exp
+
+
+
+# Make a line plot, gdp_cap on the x-axis, life_exp on the y-axis
+
+
+# Display the plot
 
 ```
 
 *** =solution
 ```{python}
-# Get integer values for genres
-_, ints = np.unique(movies.genre, return_inverse = True)
+# Print the last item of gdp_cap and life_exp
+print(gdp_cap[-1])
+print(life_exp[-1])
 
-# Import matplotlib.pyplot
+# Make a line plot, gdp_cap on the x-axis, life_exp on the y-axis
+plt.plot(gdp_cap, life_exp)
+
+# Display the plot
+plt.show()
+```
+
+*** =sct
+```{python}
+test_function("print", 1,
+  incorrect_msg = "Use [`print()`](https://docs.python.org/3/library/functions.html#print) to print the last element of `gdp_cap`, `gdp_cap[-1]`.")
+test_function("print", 2,
+  incorrect_msg = "Use [`print()`](https://docs.python.org/3/library/functions.html#print) to print the last element of `life_exp`, `life_exp[-1]`.")
+msg = "Use `plt.plot(gdp_cap, life_exp)` to plot what's instructed."
+test_function("matplotlib.pyplot.plot",
+  not_called_msg = msg,
+  incorrect_msg = msg)
+msg = "Use [`plt.show()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show) to show the plot."
+test_function("matplotlib.pyplot.show",
+  not_called_msg = msg,
+  incorrect_msg = msg)
+success_msg("Well done, but this doesn't look right. Let's build a plot that makes more sense.")
+```
+
+--- type:NormalExercise lang:python xp:100 skills:2 key:90b213e819
+## Scatter Plot (1)
+
+When you have a time scale along the horizontal axis, the line plot is your friend. But in many other cases, when you're trying to assess if there's a correlation between two variables, for example, the scatter plot is the better choice. Below is an example of how to build a scatter plot.
+
+```
+import matplotlib.pyplot as plt
+plt.scatter(x,y)
+plt.show()
+```
+
+Let's continue with the `gdp_cap` versus `life_exp` plot, the GDP and life expectancy data for different countries in 2007. Maybe a scatter plot will be a better alternative?
+
+Again, the `matploblib.pyplot` package is available as `plt`.
+
+*** =instructions
+- Change the line plot that's coded in the script to a scatter plot.
+- A correlation will become clear when you display the GDP per capita on a logarithmic scale. Add the line `plt.xscale('log')`.
+- Finish off your script with [`plt.show()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show) to display the plot.
+
+*** =hint
+- In the [`plt.plot()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot) command, change `plot` by `scatter`.
+- Put `plt.xscale('log')` between the [`plt.scatter()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.scatter) and the [`plt.show()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show) call.
+
+*** =pre_exercise_code
+```{python}
+import matplotlib.pyplot as plt; import importlib; importlib.reload(plt)
+import pandas as pd
+plt.clf()
+
+df = pd.read_csv('http://assets.datacamp.com/course/intermediate_python/gapminder.csv', index_col = 0)
+gdp_cap = list(df.gdp_cap)
+life_exp = list(df.life_exp)
+```
+
+*** =sample_code
+```{python}
+# Change the line plot below to a scatter plot
+plt.plot(gdp_cap, life_exp)
+
+# Put the x-axis on a logarithmic scale
+
+
+# Show plot
+
+```
+
+*** =solution
+```{python}
+# Change the line plot below to a scatter plot
+plt.scatter(gdp_cap, life_exp)
+
+# Put the x-axis on a logarithmic scale
+plt.xscale('log')
+
+# Show plot
+plt.show()
+```
+
+*** =sct
+```{python}
+msg = "Use `plt.scatter(gdp_cap, life_exp)` to make a scatter plot."
+test_function("matplotlib.pyplot.scatter",
+  not_called_msg = msg,
+  incorrect_msg = msg)
+  
+msg = "Use `plt.xscale('log')` to put the x-axis on a log scale."
+test_function("matplotlib.pyplot.xscale",
+  not_called_msg = msg,
+  incorrect_msg = msg)
+  
+msg = "Use [`plt.show()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show) to show the plot."
+test_function("matplotlib.pyplot.show",
+  not_called_msg = msg,
+  incorrect_msg = msg)
+
+success_msg("Great! That looks much better!")
+```
+
+
+--- type:NormalExercise lang:python xp:100 skills:2 key:e11cc0f7ef
+## Scatter plot (2)
+
+In the previous exercise, you saw that that the higher GDP usually corresponds to a higher life expectancy. In other words, there is a positive correlation.
+
+Do you think there's a relationship between population and life expectancy of a country? The list `life_exp` from the previous exercise is already available. In addition, now also `pop` is available, listing the corresponding populations for the countries in 2007. The populations are in millions of people.
+
+*** =instructions
+- Start from scratch: import `matplotlib.pyplot` as `plt`.
+- Build a scatter plot, where `pop` is mapped on the horizontal axis, and `life_exp` is mapped on the vertical axis. 
+- Finish the script with [`plt.show()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show) to actually display the plot. Do you see a correlation?
+
+*** =hint
+- Use [`plt.scatter()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.scatter), with the correct arguments, followed by [`plt.show()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show).
+
+*** =pre_exercise_code
+```{python}
+import matplotlib.pyplot as plt; import importlib; importlib.reload(plt)
+import pandas as pd
+plt.clf()
+
+df = pd.read_csv('http://assets.datacamp.com/course/intermediate_python/gapminder.csv', index_col = 0)
+pop = list(df['population']/1000000)
+life_exp = list(df.life_exp)
+```
+
+*** =sample_code
+```{python}
+# Import package
+
+
+# Build Scatter plot
+
+
+# Show plot
+```
+
+*** =solution
+```{python}
+# Import package
 import matplotlib.pyplot as plt
 
-# Make a scatter plot: runtime on  x-axis, rating on y-axis and set c to ints
-plt.scatter(movies.runtime, movies.rating, c=ints)
+# Build Scatter plot
+plt.scatter(pop, life_exp)
+
+# Show plot
+plt.show()
+```
+
+*** =sct
+```{python}
+test_import("matplotlib.pyplot",
+  not_imported_msg = "You can import pyplot by using `import matplotlib.pyplot`.",
+  incorrect_as_msg = "You should set the correct alias for `matplotlib.pyplot`, import it `as plt`.")
+
+msg = "Use `plt.scatter(pop, life_exp)` to make a scatter plot."
+test_function("matplotlib.pyplot.scatter",
+  not_called_msg = msg,
+  incorrect_msg = msg)
+  
+msg = "Use [`plt.show()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show) to show the plot."
+test_function("matplotlib.pyplot.show",
+  not_called_msg = msg,
+  incorrect_msg = msg)
+  
+success_msg("Nice! There's no clear relationship between population and life expectancy, which makes perfect sense.")
+```
+
+
+--- type:VideoExercise lang:python xp:50 skills:2 key:5c0d466cfa
+## Histograms
+
+*** =video_link
+//player.vimeo.com/video/148376003
+
+
+--- type:NormalExercise lang:python xp:100 skills:2 key:1c9335a8ac
+## Build a histogram (1)
+
+`life_exp`, the list containing data on the life expectancy for different countries in 2007, is available in your Python shell.
+
+To see how life expectancy in different countries is distributed, let's create a histogram of `life_exp`.
+
+`matplotlib.pyplot` is already available as `plt`.
+
+*** =instructions
+- Use [`plt.hist()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.hist) to create a histogram of the values in `life_exp`. Do not specify the number of bins; Python will set the number of bins to 10 by default for you.
+- Add [`plt.show()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show) to actually display the histogram. Can you tell which bin contains the most observations?
+
+*** =hint
+- `plt.hist(life_exp)` will create a histogram of the data in `life_exp`.
+
+*** =pre_exercise_code
+```{python}
+import matplotlib.pyplot as plt; import importlib; importlib.reload(plt)
+import pandas as pd
+plt.clf()
+df = pd.read_csv('http://assets.datacamp.com/course/intermediate_python/gapminder.csv', index_col = 0)
+life_exp = list(df.life_exp)
+```
+
+*** =sample_code
+```{python}
+# Create histogram of life_exp data
+
+
+# Display histogram
+
+```
+
+*** =solution
+```{python}
+# Create histogram of life_exp data
+plt.hist(life_exp)
+
+# Display histogram
+plt.show()
+```
+
+*** =sct
+```{python}
+msg = "For the first histogram, use `plt.hist(life_exp1950)` to plot what's requested."
+test_function("matplotlib.pyplot.hist", 1, not_called_msg = msg, incorrect_msg = msg)
+
+msg = "Have you included [`plt.show()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show) to actually display the plot?"
+test_function("matplotlib.pyplot.show", 1, not_called_msg = msg, incorrect_msg = msg)
+  
+success_msg("Great job!")
+```
+
+--- type:NormalExercise lang:python xp:100 skills:2 key:e23a209115
+## Build a histogram (2): bins
+
+In the previous exercise, you didn't specify the number of bins. By default, Python sets the number of bins to 10 in that case. The number of bins is pretty important. Too little bins oversimplifies reality, which doesn't show you the details. Too much bins overcomplicates reality and doesn't give the bigger picture.
+
+To control the number of bins to divide your data in, you can set the `bins` argument.
+
+That's exactly what you'll do in this exercise. You'll be making two plots here. The code in the script already includes [`plt.show()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show) and [`plt.clf()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.clf) calls; [`plt.show()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show) displays a plot; [`plt.clf()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.clf) cleans it up again so you can start afresh.
+
+As before, `life_exp` is available and `matploblib.pyplot` is imported as `plt`.
+
+*** =instructions
+- Build a histogram of `life_exp`, with `5` bins. Can you tell which bin contains the most observations?
+- Build another histogram of `life_exp`, this time with `20` bins. Is this better?
+
+*** =hint
+- In both cases, your call should look like this: `plt.hist(life_exp, bins = ___)`. Make sure to specify `___` appropriately.
+
+*** =pre_exercise_code
+```{python}
+import matplotlib.pyplot as plt; import importlib; importlib.reload(plt)
+import pandas as pd
+plt.clf()
+df = pd.read_csv('http://assets.datacamp.com/course/intermediate_python/gapminder.csv', index_col = 0)
+life_exp = list(df.life_exp)
+```
+
+*** =sample_code
+```{python}
+# Build histogram with 5 bins
+
+
+# Show and clean up plot
+plt.show()
+plt.clf()
+
+# Build histogram with 20 bins
+
+
+# Show and clean up again
+plt.show()
+plt.clf()
+```
+
+*** =solution
+```{python}
+# Build histogram with 5 bins
+plt.hist(life_exp, bins = 5)
+
+# Show and clear plot
+plt.show()
+plt.clf()
+
+# Build histogram with 20 bins
+plt.hist(life_exp, bins = 20)
+
+# Show and clear plot again
+plt.show()
+plt.clf()
+```
+
+*** =sct
+```{python}
+msg = "For the first histogram, use `plt.hist(life_exp, bins = 5)`."
+test_function("matplotlib.pyplot.hist", 1,
+  not_called_msg = msg,
+  incorrect_msg = msg)
+
+msg = "You don't have to change or remove any [`plt.show()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show) functions."
+test_function("matplotlib.pyplot.show", 1,
+  not_called_msg = msg,
+  incorrect_msg = msg)
+  
+msg = "You don't have to change or remove the [`plt.clf()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.clf) functions."
+test_function("matplotlib.pyplot.clf", 1,
+  not_called_msg = msg,
+  incorrect_msg = msg)
+  
+msg = "For the second histogram, use `plt.hist(life_exp, bins = 20)` to plot what's requested."
+test_function("matplotlib.pyplot.hist", 2,
+  not_called_msg = msg,
+  incorrect_msg = msg)
+
+msg = "You don't have to change or remove any [`plt.show()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show) functions."
+test_function("matplotlib.pyplot.show", 2,
+  not_called_msg = msg,
+  incorrect_msg = msg)
+  
+msg = "You don't have to change or remove the [`plt.clf()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.clf) functions."
+test_function("matplotlib.pyplot.clf", 2,
+  not_called_msg = msg,
+  incorrect_msg = msg)
+  
+success_msg("Nice! You can use the buttons to browse through the different plots you've created.")
+```
+
+--- type:NormalExercise lang:python xp:100 skills:2 key:896519cdaa
+## Build a histogram (3): compare
+
+In the video, you saw population pyramids for the present day and for the future. Because we were using a histogram, it was very easy to make a comparison.
+
+Let's do a similar comparison. `life_exp` contains life expectancy data for different countries in 2007. You also have access to a second list now, `life_exp1950`, containing similar data for 1950. Can you make a histogram for both datasets?
+
+You'll again be making two plots. The [`plt.show()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show) and [`plt.clf()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.clf) commands to render everything nicely are already included. Also `matplotlib.pyplot` is imported for you, as `plt`.
+
+*** =instructions
+- Build a histogram of `life_exp` with `15` bins.
+- Build a histogram of `life_exp1950`, also with `15` bins. Is there a big difference with the histogram for the 2007 data?
+
+*** =hint
+- `plt.hist(life_exp)` is not enough: you'll also need to specify the `bins` argument!
+- The code to build the histogram fro the 1950 data is the same as for the 2007 data, except for the name of the list you want to plot the data for.
+
+*** =pre_exercise_code
+```{python}
+import matplotlib.pyplot as plt; import importlib; importlib.reload(plt)
+import pandas as pd
+plt.clf()
+df = pd.read_csv('http://assets.datacamp.com/course/intermediate_python/gapminder.csv', index_col = 0)
+life_exp = list(df.life_exp)
+life_exp1950 = [28.8,55.23,43.08,30.02,62.48,69.12,66.8,50.94,37.48,68.0,38.22,40.41,53.82,47.62,50.92,59.6,31.98,39.03,39.42,38.52,68.75,35.46,38.09,54.74,44.0,50.64,40.72,39.14,42.11,57.21,40.48,61.21,59.42,66.87,70.78,34.81,45.93,48.36,41.89,45.26,34.48,35.93,34.08,66.55,67.41,37.0,30.0,67.5,43.15,65.86,42.02,33.61,32.5,37.58,41.91,60.96,64.03,72.49,37.37,37.47,44.87,45.32,66.91,65.39,65.94,58.53,63.03,43.16,42.27,50.06,47.45,55.56,55.93,42.14,38.48,42.72,36.68,36.26,48.46,33.68,40.54,50.99,50.79,42.24,59.16,42.87,31.29,36.32,41.72,36.16,72.13,69.39,42.31,37.44,36.32,72.67,37.58,43.44,55.19,62.65,43.9,47.75,61.31,59.82,64.28,52.72,61.05,40.0,46.47,39.88,37.28,58.0,30.33,60.4,64.36,65.57,32.98,45.01,64.94,57.59,38.64,41.41,71.86,69.62,45.88,58.5,41.22,50.85,38.6,59.1,44.6,43.58,39.98,69.18,68.44,66.07,55.09,40.41,43.16,32.55,42.04,48.45]
+```
+
+*** =sample_code
+```{python}
+# Histogram of life_exp, 15 bins
+
+
+# Show and clear plot
+plt.show()
+plt.clf()
+
+# Histogram of life_exp1950, 15 bins
+
+
+# Show and clear plot again
+plt.show()
+plt.clf()
+```
+
+*** =solution
+```{python}
+# Histogram of life_exp, 15 bins
+plt.hist(life_exp, bins = 15)
+
+# Show and clear plot
+plt.show()
+plt.clf()
+
+# Histogram of life_exp1950, 15 bins
+plt.hist(life_exp1950, bins = 15)
+
+# Show and clear plot again
+plt.show()
+plt.clf()
+```
+
+*** =sct
+```{python}
+msg = "For the first histogram, use `plt.hist(life, bins = 15)` to plot what's requested."
+test_function("matplotlib.pyplot.hist", 1, not_called_msg = msg, incorrect_msg = msg)
+
+msg = "You don't have to change or remove any [`plt.show()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show) functions."
+test_function("matplotlib.pyplot.show", 1, not_called_msg = msg, incorrect_msg = msg)
+  
+msg = "You don't have to change or remove the first [`plt.clf()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.clf) functions."
+test_function("matplotlib.pyplot.clf", 1, not_called_msg = msg, incorrect_msg = msg)
+  
+msg = "For the second histogram, use `plt.hist(life_exp1950, bins = 15)` to plot what's requested."
+test_function("matplotlib.pyplot.hist", 2, not_called_msg = msg, incorrect_msg = msg)
+
+msg = "You don't have to change or remove any [`plt.show()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show) functions."
+test_function("matplotlib.pyplot.show", 2, not_called_msg = msg, incorrect_msg = msg)
+
+msg = "You don't have to change or remove the second [`plt.clf()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.clf) functions."
+test_function("matplotlib.pyplot.clf", 2, not_called_msg = msg, incorrect_msg = msg)
+
+
+success_msg("Great! Neither one of these histograms is useful to better understand the life expectancy data.")
+```
+
+--- type:MultipleChoiceExercise lang:python xp:50 skills:2 key:c74a9400bf
+## Choose the right plot (1)
+
+You're a professor teaching Data Science with Python, and you want to visually assess if the grades on your exam follow a normal distribution. Which plot do you use?
+
+*** =instructions
+- Line plot
+- Scatter plot
+- Histogram
+
+*** =hint
+The word _distribution_ should ring a bell!
+
+*** =pre_exercise_code
+```{python}
+# pec
+```
+
+*** =sct
+```{python}
+msg1 = "Incorrect. A line plot won't give you a very clear visual on the distribution of the values in a list."
+msg2 = "Incorrect. Although a scatter plot can give you an idea, it's not the best option."
+msg3 = "Excellent choice!"
+test_mc(3, msgs = [msg1, msg2, msg3])
+```
+
+--- type:MultipleChoiceExercise lang:python xp:50 skills:2 key:6344d3ddd3
+## Choose the right plot (2)
+
+You're a professor in Data Analytics with Python, and you want to visually assess if longer answers on exam questions lead to higher grades. Which plot do you use?
+
+*** =instructions
+- Line plot
+- Scatter plot
+- Histogram
+
+*** =hint
+Do you still remember which type of plot is most suited if you want to see if there's a correlation between two variables?
+
+*** =pre_exercise_code
+```{python}
+# pec
+```
+
+*** =sct
+```{python}
+msg1 = "Making a line plot of this data will cause the lines to be all over the place. Do you still remember how the `gdp_cap` versus `life_exp` plot wasn't a good fit for the line plot?"
+msg2 = "Good choice!"
+msg3 = "There's two variables involved: time to take the exam, and the corresponding grades. A histogram is not a suitable option in this case."
+test_mc(2, msgs = [msg1, msg2, msg3])
+```
+
+--- type:VideoExercise lang:python xp:50 skills:2 key:ec967d615b
+## Customization
+
+*** =video_link
+//player.vimeo.com/video/148376009
+
+
+--- type:NormalExercise lang:python xp:100 skills:2 key:b376a92c55
+## Labels
+
+It's time to customize your own plot. This is the fun part, you will see your plot come to life! 
+
+You're going to work on the scatter plot with world development data: GDP per capita on the x-axis (logarithmic scale), life expectancy on the y-axis. The code for this plot is available in the script. 
+
+As a first step, let's add axis labels and a title to the plot. You can do this with the [`xlabel()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xlabel), [`ylabel()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.ylabel) and [`title()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.title) functions, available in `matplotlib.pyplot`. This sub-package is already imported as `plt`.
+
+*** =instructions
+- The strings `xlab` and `ylab` are already set for you. Use these variables to set the label of the x- and y-axis.
+- The string `title` is also coded for you. Use it to add a title to the plot.
+- After these customizations, finish the script with [`plt.show()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show) to actually display the plot.
+
+*** =hint
+- For the first instruction, use `plt.xlabel(xlab)` and `plt.ylabel(ylab)`.
+- Use `plt.title(title)` to add a title to your plot.
+- Don't forget to finish of with [`plt.show()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show) to display the plot.
+
+*** =pre_exercise_code
+```{python}
+import matplotlib.pyplot as plt; import importlib; importlib.reload(plt)
+import importlib
+importlib.reload(plt)
+
+plt.clf()
+
+import pandas as pd
+df = pd.read_csv('http://assets.datacamp.com/course/intermediate_python/gapminder.csv', index_col = 0)
+gdp_cap = list(df.gdp_cap)
+life_exp = list(df.life_exp)
+```
+
+*** =sample_code
+```{python}
+# Basic scatter plot, log scale
+plt.scatter(gdp_cap, life_exp)
+plt.xscale('log') 
+
+# Strings
+xlab = 'GDP per Capita [in USD]'
+ylab = 'Life Expectancy [in years]'
+title = 'World Development in 2007'
+
+# Add axis labels
+
+
+
+# Add title
+
+
+# After customizing, display the plot
+
+```
+
+*** =solution
+```{python}
+# Basic scatter plot, log scale
+plt.scatter(gdp_cap, life_exp)
+plt.xscale('log') 
+
+# Strings
+xlab = 'GDP per Capita [in USD]'
+ylab = 'Life Expectancy [in years]'
+title = 'World Development in 2007'
+
+# Add axis labels
+plt.xlabel(xlab)
+plt.ylabel(ylab)
+
+# Add title
+plt.title(title)
+
+# After customizing, display the plot
+plt.show()
+```
+
+*** =sct
+```{python}
+msg = "You don't have to change or remove the predefined scatter plot."
+test_function("matplotlib.pyplot.scatter",
+  not_called_msg = msg,
+  incorrect_msg = msg)
+
+msg = "You don't have to change or remove the predefined `xscale` function."
+test_function("matplotlib.pyplot.xscale",
+  not_called_msg = msg,
+  incorrect_msg = msg)
+
+msg = "Add the correct label to the x-axis using `plt.xlabel(...)`. Fill in the dots with a pre-defined variable."
+test_function("matplotlib.pyplot.xlabel",
+  not_called_msg = msg,
+  incorrect_msg = msg)
+
+msg = "Add the correct label to the y-axis using `plt.ylabel(...)`. Fill in the dots with a pre-defined variable."
+test_function("matplotlib.pyplot.ylabel",
+  not_called_msg = msg,
+  incorrect_msg = msg)
+
+msg = "Add the correct titel to the plot using `plt.title(...)`. Fill in the dots with a pre-defined variable"
+test_function("matplotlib.pyplot.title",
+  not_called_msg = msg,
+  incorrect_msg = msg)
+
+msg = "Use [`plt.show()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show) to show the plot in the end."
+test_function("matplotlib.pyplot.show",
+  not_called_msg = msg,
+  incorrect_msg = msg)
+
+success_msg("This looks much better already!")
+```
+
+--- type:NormalExercise lang:python xp:100 skills:2 key:5a5e2de1a1
+## Ticks
+
+The customizations you've coded up to now are available in the script, in a more concise form.
+
+In the video, Filip has demonstrated how you could control the y-ticks by specifying two arguments:
+
+```
+plt.yticks([0,1,2], ["one","two","three"])
+```
+
+In this example, the ticks corresponding to the numbers 0, 1 and 2 will be replaced by _one_, _two_ and _three_, respectively.
+
+Let's do a similar thing for the x-axis of your world development chart, with the [`xticks()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xticks) function. The tick values `1000`, `10000` and `100000` should be replaced by `1k`, `10k` and `100k`. To this end, two lists have already been created for you: `tick_val` and `tick_lab`.
+
+*** =instructions
+- Use `tick_val` and `tick_lab` as inputs to the [`xticks()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xticks) function to make the the plot more readable.
+- As usual, display the plot with [`plt.show()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show) after you've added the customizations.
+
+*** =hint
+- The first argument of [`xticks()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xticks) is `tick_val`, the second argument is `tick_lab`.
+
+*** =pre_exercise_code
+```{python}
+import matplotlib.pyplot as plt; import importlib; importlib.reload(plt)
+plt.clf()
+
+import pandas as pd
+df = pd.read_csv('http://assets.datacamp.com/course/intermediate_python/gapminder.csv', index_col = 0)
+gdp_cap = list(df.gdp_cap)
+life_exp = list(df.life_exp)
+```
+
+*** =sample_code
+```{python}
+# Scatter plot
+plt.scatter(gdp_cap, life_exp)
+
+# Previous customizations
+plt.xscale('log') 
+plt.xlabel('GDP per Capita [in USD]')
+plt.ylabel('Life Expectancy [in years]')
+plt.title('World Development in 2007')
+
+# Definition of tick_val and tick_lab
+tick_val = [1000,10000,100000]
+tick_lab = ['1k','10k','100k']
+
+# Adapt the ticks on the x-axis
+
+
+# After customizing, display the plot
+
+```
+
+*** =solution
+```{python}
+# Scatter plot
+plt.scatter(gdp_cap, life_exp)
+
+# Previous customizations
+plt.xscale('log') 
+plt.xlabel('GDP per Capita [in USD]')
+plt.ylabel('Life Expectancy [in years]')
+plt.title('World Development in 2007')
+
+# Definition of tick_val and tick_lab
+tick_val = [1000,10000,100000]
+tick_lab = ['1k','10k','100k']
+
+# Adapt the ticks on the x-axis
+plt.xticks(tick_val, tick_lab)
+
+# After customizing, display the plot
+plt.show()
+```
+
+*** =sct
+```{python}
+msg = "You don't have to change or remove the predefined scatter plot."
+test_function("matplotlib.pyplot.scatter",
+  not_called_msg = msg,
+  incorrect_msg = msg)
+
+msg = "Don't change any of the customizations that were already coded."
+test_function("matplotlib.pyplot.xscale",
+  not_called_msg = msg,
+  incorrect_msg = msg)
+test_function("matplotlib.pyplot.xlabel",
+  not_called_msg = msg,
+  incorrect_msg = msg)
+test_function("matplotlib.pyplot.ylabel",
+  not_called_msg = msg,
+  incorrect_msg = msg)
+test_function("matplotlib.pyplot.title",
+  not_called_msg = msg,
+  incorrect_msg = msg)
+
+msg = "Set the correct ticks using [`plt.xticks()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.xticks). `tick_val` should be the first argument, `tick_lab` should be the second."
+test_function("matplotlib.pyplot.xticks",
+  not_called_msg = msg,
+  incorrect_msg = msg)
+
+msg = "Use [`plt.show()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show) to show the plot."
+test_function("matplotlib.pyplot.show",
+  not_called_msg = msg,
+  incorrect_msg = msg)
+
+success_msg("Great! Your plot is shaping up nicely!")
+```
+
+--- type:NormalExercise lang:python xp:100 skills:2 key:1f075b9f03
+## Sizes
+
+Right now, the scatter plot is just a cloud of blue dots, indistinguishable from each other. Let's change this. Wouldn't it be nice if the size of the dots corresponds to the population?
+
+To accomplish this, there is a list `pop` loaded in your workspace. It contains population numbers for each country expressed in millions. You can see that this list is added to the scatter method, as the argument `s`, for size.
+
+*** =instructions
+- Run the script to see how the plot changes.
+- Looks good, but increasing the size of the bubbles will make things stand out more.
+    + Import the `numpy` package as `np`.
+    + Use `np.array()` to create a numpy array from the list `pop`. Call this Numpy array `np_pop`.
+    + Double the values in `np_pop` by assigning `np_pop * 2` to `np_pop` again. Because `np_pop` is a Numpy array, each array element will be doubled.
+    + Change the `s` argument inside [`plt.scatter()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.scatter) to be `np_pop` instead of `pop`.
+
+*** =hint
+To convert `pop` to an array, use `np.array(pop)`.
+
+*** =pre_exercise_code
+```{python}
+import matplotlib.pyplot as plt; import importlib; importlib.reload(plt)
+import numpy as np
+plt.clf()
+
+# data
+import pandas as pd
+df = pd.read_csv('http://assets.datacamp.com/course/intermediate_python/gapminder.csv', index_col = 0)
+gdp_cap = list(df.gdp_cap)
+life_exp = list(df.life_exp)
+pop = list(df['population']/1e6)
+```
+
+*** =sample_code
+```{python}
+# Import numpy as np
+
+
+# Store pop as a numpy array: np_pop
+
+
+# Double np_pop
+
+
+# Update: set s argument to np_pop
+plt.scatter(gdp_cap, life_exp, s = pop)
+
+# Previous customizations
+plt.xscale('log') 
+plt.xlabel('GDP per Capita [in USD]')
+plt.ylabel('Life Expectancy [in years]')
+plt.title('World Development in 2007')
+plt.xticks([1000, 10000, 100000],['1k', '10k', '100k'])
+
+# Display the plot
+plt.show()
+```
+
+*** =solution
+```{python}
+# Import numpy as np
+import numpy as np
+
+# Store pop as a numpy array: np_pop
+np_pop = np.array(pop)
+
+# Double np_pop
+np_pop = np_pop * 2
+
+# Update: set s argument to np_pop
+plt.scatter(gdp_cap, life_exp, s = np_pop)
+
+# Previous customizations
+plt.xscale('log') 
+plt.xlabel('GDP per Capita [in USD]')
+plt.ylabel('Life Expectancy [in years]')
+plt.title('World Development in 2007')
+plt.xticks([1000, 10000, 100000],['1k', '10k', '100k'])
+
+# Display the plot
+plt.show()
+```
+
+*** =sct
+```{python}
+msg = "Have you correctly imported the `numpy` package as `np`?"
+test_import("numpy", 1,
+  not_imported_msg = msg,
+  incorrect_as_msg = msg)
+
+msg = "You should use `np.array(pop)` to create a Numpy array from `pop`."
+test_function("numpy.array", 
+  not_called_msg = msg,
+  incorrect_msg = msg)
+  
+msg = 'Make sure you correctly create `np_pop` and multiply it with `2`.'
+test_object("np_pop", 
+  undefined_msg = msg,
+  incorrect_msg = msg)
+
+msg = "Change `plt.scatter(gdp_cap, life_exp, s = ...)`; use `np_pop` instead of `pop`."
+test_function("matplotlib.pyplot.scatter",
+  not_called_msg = msg,
+  incorrect_msg = msg)
+
+msg = "You don't have to change or remove the customizations that were already coded for you."
+test_function("matplotlib.pyplot.xscale",
+  not_called_msg = msg,
+  incorrect_msg = msg)
+test_function("matplotlib.pyplot.xlabel",
+  not_called_msg = msg,
+  incorrect_msg = msg)
+test_function("matplotlib.pyplot.ylabel",
+  not_called_msg = msg,
+  incorrect_msg = msg)
+test_function("matplotlib.pyplot.title",
+  not_called_msg = msg,
+  incorrect_msg = msg)
+test_function("matplotlib.pyplot.xticks",
+  not_called_msg = msg,
+  incorrect_msg = msg)
+
+
+msg = "Use [`plt.show()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show) to show the plot."
+test_function("matplotlib.pyplot.show",
+  not_called_msg = msg,
+  incorrect_msg = msg)
+  
+success_msg("Bellissimo! Can you already tell which bubbles correspond to which countries?")
+```
+
+
+--- type:NormalExercise lang:python xp:100 skills:2 key:6180ea1a99
+## Colors
+
+The code you've written up to now is available in the script on the right.
+
+The next step is making the plot more colorful! To do this, a list `col` has been created for you. It's a list with a color for each corresponding country, depending on the continent the country is part of.
+
+How did we make the list `col` you ask? The Gapminder data contains a list `continent` with the continent each country belongs to. A dictionary is constructed that maps continents onto colors:
+
+```
+dict = {
+    'Asia':'red',
+    'Europe':'green',
+    'Africa':'blue',
+    'Americas':'yellow',
+    'Oceania':'black'
+}
+```
+
+Nothing to worry about now; you will learn about dictionaries in the next chapter.
+
+*** =instructions
+- Add `c = col` to the arguments of the [`plt.scatter()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.scatter) function.
+- Change the opacity of the bubbles by setting the `alpha` argument to `0.8` inside [`plt.scatter()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.scatter). Alpha can be set from zero to one, where zero totally transparant, and one is not transparant.
+
+*** =hint
+- Add `c = color` to [`plt.scatter()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.scatter).
+- Add `alpha = 0.8` to [`plt.scatter()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.scatter).
+
+*** =pre_exercise_code
+```{python}
+import matplotlib.pyplot as plt; import importlib; importlib.reload(plt)
+plt.clf()
+import numpy as np
+import pandas as pd
+df = pd.read_csv('http://assets.datacamp.com/course/intermediate_python/gapminder.csv', index_col = 0)
+gdp_cap = list(df.gdp_cap)
+life_exp = list(df.life_exp)
+pop = list(df['population']/1e6)
+cont = list(df.cont)
+lut = {
+    'Asia':'red',
+    'Europe':'green',
+    'Africa':'blue',
+    'Americas':'yellow',
+    'Oceania':'black'
+}
+col = [lut[x] for x in cont]
+```
+
+*** =sample_code
+```{python}
+# Specify c and alpha inside plt.scatter()
+plt.scatter(x = gdp_cap, y = life_exp, s = np.array(pop) * 2)
+
+# Previous customizations
+plt.xscale('log') 
+plt.xlabel('GDP per Capita [in USD]')
+plt.ylabel('Life Expectancy [in years]')
+plt.title('World Development in 2007')
+plt.xticks([1000,10000,100000], ['1k','10k','100k'])
+
+# Show the plot
+plt.show()
+```
+
+*** =solution
+```{python}
+# Specify c and alpha inside plt.scatter()
+plt.scatter(x = gdp_cap, y = life_exp, s = np.array(pop) * 2, c = col, alpha = 0.8)
+
+# Previous customizations
+plt.xscale('log') 
+plt.xlabel('GDP per Capita [in USD]')
+plt.ylabel('Life Expectancy [in years]')
+plt.title('World Development in 2007')
+plt.xticks([1000,10000,100000], ['1k','10k','100k'])
 
 # Show the plot
 plt.show()
@@ -166,33 +1085,201 @@ plt.show()
 
 *** =sct
 ```{python}
-# The sct section defines the Submission Correctness Tests (SCTs) used to
-# evaluate the student's response. All functions used here are defined in the 
-# pythonwhat Python package. Documentation can also be found at github.com/datacamp/pythonwhat/wiki
-
-# Check if the student changed the np.unique() call
-# If it's not called, we know the student removed the call.
-# If it's called incorrectly, we know the student changed the call.
-test_function("numpy.unique",
-              not_called_msg = "Don't remove the call of `np.unique` to define `ints`.",
-              incorrect_msg = "Don't change the call of `np.unique` to define `ints`.")
-# Check if the student removed the ints object
-test_object("ints",
-            undefined_msg = "Don't remove the definition of the predefined `ints` object.",
-            incorrect_msg = "Don't change the definition of the predefined `ints` object.")
-
-# Check if the student imported matplotlib.pyplot like the solution
-# Let automatic feedback message generation handle the feedback messages
-test_import("matplotlib.pyplot", same_as = True)
-
-# Check whether the student used the scatter() function correctly
-# If it's used, but incorrectly, tell them to check the instructions again
+msg = "Change `plt.scatter(gdp_cap, life_exp, s = size)` by specifying two more arguments. Add `c = col` and `alpha = 0.8`."
 test_function("matplotlib.pyplot.scatter",
-              incorrect_msg = "You didn't use `plt.scatter()` correctly, have another look at the instructions.")
+  not_called_msg = msg,
+  incorrect_msg = msg)
 
-# Check if the student called the show() function
-# Let automatic feedback message generation handle all feedback messages
-test_function("matplotlib.pyplot.show")
+msg = "You don't have to change or remove the customizations that you already coded earlier."
+test_function("matplotlib.pyplot.xscale",
+  not_called_msg = msg,
+  incorrect_msg = msg)
+test_function("matplotlib.pyplot.xlabel",
+  not_called_msg = msg,
+  incorrect_msg = msg)
+test_function("matplotlib.pyplot.ylabel",
+  not_called_msg = msg,
+  incorrect_msg = msg)
+test_function("matplotlib.pyplot.title",
+  not_called_msg = msg,
+  incorrect_msg = msg)
+test_function("matplotlib.pyplot.xticks",
+  not_called_msg = msg,
+  incorrect_msg = msg)
 
-success_msg("Great work!")
+msg = "Use [`plt.show()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show) to show the plot."
+test_function("matplotlib.pyplot.show",
+  not_called_msg = msg,
+  incorrect_msg = msg)
+  
+success_msg("Nice! This is looking more and more like Hans Rosling's plot!")
+```
+
+--- type:NormalExercise lang:python xp:100 skills:2 key:4c5e5e0a8f
+## Additional Customizations
+
+If you have another look at the script, under `# Additional Customizations`, you'll see that there are two [`plt.text()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.text) functions now. They add the words `"India"` and `"China"` in the plot. 
+
+*** =instructions
+- Add `plt.grid(True)` after the [`plt.text()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.text) calls so that gridlines are drawn on the plot.
+
+*** =hint
+- Simply put a new line, `plt.grid(True)` in the script and hit _Submit Answer_
+
+*** =pre_exercise_code
+```{python}
+import matplotlib.pyplot as plt; import importlib; importlib.reload(plt)
+plt.clf()
+import numpy as np
+import pandas as pd
+df = pd.read_csv('http://assets.datacamp.com/course/intermediate_python/gapminder.csv', index_col = 0)
+gdp_cap = list(df.gdp_cap)
+life_exp = list(df.life_exp)
+pop = list(df['population']/1e6)
+cont = list(df.cont)
+lut = {
+    'Asia':'red',
+    'Europe':'green',
+    'Africa':'blue',
+    'Americas':'yellow',
+    'Oceania':'black'
+}
+col = [lut[x] for x in cont]
+```
+
+*** =sample_code
+```{python}
+# Scatter plot
+plt.scatter(x = gdp_cap, y = life_exp, s = np.array(pop) * 2, c = col, alpha = 0.8)
+
+# Previous customizations
+plt.xscale('log') 
+plt.xlabel('GDP per Capita [in USD]')
+plt.ylabel('Life Expectancy [in years]')
+plt.title('World Development in 2007')
+plt.xticks([1000,10000,100000], ['1k','10k','100k'])
+
+# Additional customizations
+plt.text(1550, 71, 'India')
+plt.text(5700, 80, 'China')
+
+# Add grid() call
+
+
+# Show the plot
+plt.show()
+```
+
+*** =solution
+```{python}
+# Scatter plot
+plt.scatter(x = gdp_cap, y = life_exp, s = np.array(pop) * 2, c = col, alpha = 0.8)
+
+# Previous customizations
+plt.xscale('log') 
+plt.xlabel('GDP per Capita [in USD]')
+plt.ylabel('Life Expectancy [in years]')
+plt.title('World Development in 2007')
+plt.xticks([1000,10000,100000], ['1k','10k','100k'])
+
+# Additional customizations
+plt.text(1550, 71, 'India')
+plt.text(5700, 80, 'China')
+
+# Add grid() call
+plt.grid(True)
+
+# Show the plot
+plt.show()
+```
+
+*** =sct
+```{python}
+msg = "Do not change the [`plt.scatter()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.scatter) call."
+test_function("matplotlib.pyplot.scatter", not_called_msg = msg, incorrect_msg = msg)
+
+msg = "Don't have change or remove the customizations that have already been coded for you."
+test_function("matplotlib.pyplot.xscale",
+  not_called_msg = msg,
+  incorrect_msg = msg)
+test_function("matplotlib.pyplot.text", 1,
+  not_called_msg = msg,
+  incorrect_msg = msg)
+test_function("matplotlib.pyplot.text", 2,
+  not_called_msg = msg,
+  incorrect_msg = msg)
+test_function("matplotlib.pyplot.xlabel",
+  not_called_msg = msg,
+  incorrect_msg = msg)
+test_function("matplotlib.pyplot.ylabel",
+  not_called_msg = msg,
+  incorrect_msg = msg)
+test_function("matplotlib.pyplot.title",
+  not_called_msg = msg,
+  incorrect_msg = msg)
+test_function("matplotlib.pyplot.xticks",
+  not_called_msg = msg,
+  incorrect_msg = msg)
+  
+msg = "Have you correctly added the [`plt.grid()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.grid) call?"
+test_function("matplotlib.pyplot.grid", not_called_msg = msg, incorrect_msg = msg)
+
+msg = "Use [`plt.show()`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.show) to show the plot."
+test_function("matplotlib.pyplot.show",
+  not_called_msg = msg,
+  incorrect_msg = msg)
+```
+
+--- type:MultipleChoiceExercise lang:python xp:50 skills:2 key:860968968a
+## Interpretation
+
+If you have a look at your colorful plot, it's clear that people live longer in countries with a higher GDP per capita. No high income countries have really short life expectancy, and no low income countries have very long life expectancy. Still, there is a huge difference in life expectancy between countries on the same income level. Most people live in middle income countries where difference in lifespan is huge between countries; depending on how income is distributed and how it is used.
+
+What can you say about the plot?
+
+*** =instructions
+- The countries in blue, corresponding to Africa, have both low life expectancy and a low GDP per capita.
+- There is a negative correlation between GDP per capita and life expectancy.
+- China has both a lower GDP per capita and low expectancy compared to India.
+
+*** =hint
+- There is a clearly positive correlation, so you can rule out the second option.
+
+*** =pre_exercise_code
+```{python}
+import matplotlib.pyplot as plt; import importlib; importlib.reload(plt)
+plt.clf()
+import numpy as np
+import pandas as pd
+df = pd.read_csv('http://assets.datacamp.com/course/intermediate_python/gapminder.csv', index_col = 0)
+gdp_cap = list(df.gdp_cap)
+life_exp = list(df.life_exp)
+pop = list(df['population']/1e6)
+cont = list(df.cont)
+lut = {
+    'Asia':'red',
+    'Europe':'green',
+    'Africa':'blue',
+    'Americas':'yellow',
+    'Oceania':'black'
+}
+col = [lut[x] for x in cont]
+plt.scatter(x = gdp_cap, y = life_exp, s = np.array(pop) * 2, c = col, alpha = 0.8)
+plt.xscale('log') 
+plt.xlabel('GDP per Capita [in USD]')
+plt.ylabel('Life Expectancy [in years]')
+plt.title('World Development in 2007')
+plt.xticks([1000,10000,100000], ['1k','10k','100k'])
+plt.text(1550, 71, 'India')
+plt.text(5700, 80, 'China')
+plt.grid(True)
+plt.show()
+```
+
+*** =sct
+```{python}
+msg1 = "Correct! Up to the next chapter, on dictionaries!"
+msg2 = "Incorrect; there is a clearly positive correlation between GDP per capita and life expectancy."
+msg3 = "China's GDP per capita and life expectancy is higher than that of India."
+test_mc(1, msgs = [msg1, msg2, msg3])
 ```
