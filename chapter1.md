@@ -56,7 +56,7 @@ msg_success = "Exactly! The correlation is very weak though."
 test_mc(4, [msg_bad, msg_bad, msg_bad, msg_success]) 
 ```
 
---- type:MultipleChoiceExercise lang:python xp:50 skills:1 key:bb288e9efe
+--- type:MultipleChoiceExercise lang:python xp:50 skills:1 key:9fd2541dd2
 ## A really bad movie
 
 Have a look at the plot that showed up in the viewer to the right. Which type of movies have the worst rating assigned to them?
